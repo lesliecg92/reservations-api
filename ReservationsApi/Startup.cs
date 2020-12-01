@@ -33,9 +33,12 @@ namespace Reservations.Web.Api
             services.AddTransient<IContactTypeRepository, ContactTypeRepository>();
             services.AddTransient<IReservationBusiness, ReservationBusiness> ();
 
+            //services.AddCors(c =>
+            //    c.AddPolicy("AllowAll", options =>
+            //        options.WithOrigins("http://localhost:4200/").SetIsOriginAllowed((host) => true).AllowAnyHeader().AllowAnyMethod()));
             services.AddCors(c =>
-                c.AddPolicy("AllowOrigin", options =>
-                    options.WithOrigins("http://localhost:4200/").SetIsOriginAllowed((host) => true).AllowAnyHeader().AllowAnyMethod()));
+                c.AddPolicy("AllowAll", options =>
+                    options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +53,7 @@ namespace Reservations.Web.Api
 
             app.UseRouting();
 
-            app.UseCors("AllowOrigin");
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 
